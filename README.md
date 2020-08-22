@@ -1,9 +1,7 @@
 # EVE欧服市场工具QQ机器人
 - 作者：EVE欧服中文频道高安萨沙入侵队
-- QQ群：438507147 
-- 舰队通知群群号：236390570
+- QQ群：[![QQ群](https://img.shields.io/badge/EVE-%E6%AC%A7%E6%9C%8D%E8%90%A8%E6%B2%99%E5%85%A5%E4%BE%B5-green)](https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi)
 - YY：1453500731
-- [![QQ群](https://img.shields.io/badge/EVE-%E6%AC%A7%E6%9C%8D%E8%90%A8%E6%B2%99%E5%85%A5%E4%BE%B5-green)](https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi)
 
 ## 已经能做到
 - [x] .jita 指令模糊搜索物品列表
