@@ -1,0 +1,6 @@
+name: "EveMarket"
+author: "Your Name"
+version: "0.1.0"
+main: "com.example.plugin.EveMarketMain"
+info: ""
+depends: []
