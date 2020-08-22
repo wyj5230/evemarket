@@ -1,6 +1,8 @@
 # EVE欧服市场工具QQ机器人
 作者：EVE欧服中文频道高安萨沙入侵队
-QQ群：438507147 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="EVE欧服高安萨沙甲抗入" title="EVE欧服高安萨沙甲抗入"></a>
+QQ群：438507147 
+<div>
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="EVE欧服高安萨沙甲抗入" title="EVE欧服高安萨沙甲抗入"></a> </div>
 舰队通知群群号：236390570
 YY：1453500731
 
