@@ -3,7 +3,7 @@
 - QQ群：438507147 
 - 舰队通知群群号：236390570
 - YY：1453500731
-- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="EVE欧服高安萨沙甲抗入" title="EVE欧服高安萨沙甲抗入"></a>
+- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=76yqIfeFMCAAfLd6LyIhpmtEyuY2zuVF&jump_from=webapi"><img src="//pub.idqqimg.com/wpa/images/group.png" alt="EVE欧服高安萨沙甲抗入" title="EVE欧服高安萨沙甲抗入"></a>
 
 ## 已经能做到
 - [x] .jita 指令模糊搜索物品列表
