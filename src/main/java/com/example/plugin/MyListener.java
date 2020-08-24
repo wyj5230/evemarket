@@ -7,8 +7,7 @@ import net.mamoe.mirai.utils.MiraiLogger;
 
 import java.util.function.Consumer;
 
-import static com.example.plugin.MarketApi.callDetailItemApi;
-import static com.example.plugin.MarketApi.callSearchKeyWordApi;
+import static com.example.plugin.MarketApi.*;
 
 /**
  * @author pt
@@ -20,7 +19,7 @@ public class MyListener implements Consumer<GroupMessageEvent> {
     public static MiraiLogger log = null;
 
     public static final String[] CMD = {
-            ".jita", ".id"
+            ".jita", ".id", "id" ,".help", ".eng"
     };
 
 
@@ -42,12 +41,36 @@ public class MyListener implements Consumer<GroupMessageEvent> {
 
        if (message.startsWith(CMD[0])){
            String keyword = message.replace(CMD[0] + " ","");
-           String reply = callSearchKeyWordApi(keyword);
+           String reply = "关键字:'"+ keyword +"'没有返回匹配项。白面鸮这样说道。";
+           try {
+               reply = callSearchKeyWordApi(keyword);
+           } catch( Exception e) {
+               System.out.println(e.getMessage());
+           }
            api.sendMessage(new At(api.getOrNull(qq))
                    .plus(reply));
        } else if (message.startsWith(CMD[1])) {
            String id = message.replace(CMD[1] + " ","");
-           String reply = callDetailItemApi(id);
+           String reply = "关键字:'"+ id +"'没有返回匹配项。白面鸮这样说道。";
+           try {
+               reply = callDetailItemApi(id);
+           } catch( Exception e) {
+               System.out.println(e.getMessage());
+           }
+           api.sendMessage(new At(api.getOrNull(qq))
+                   .plus(reply));
+       } else if (message.startsWith(CMD[2])) {
+           String id = message.replace(CMD[2] + " ","");
+           String reply = "关键字:'"+ id +"'没有返回匹配项。白面鸮这样说道。";
+           try {
+               reply = callDetailItemApi(id);
+           } catch( Exception e) {
+               System.out.println(e.getMessage());
+           }
+           api.sendMessage(new At(api.getOrNull(qq))
+                   .plus(reply));
+       } else if (message.startsWith(CMD[3])) {
+           String reply = getHelpMessage();
            api.sendMessage(new At(api.getOrNull(qq))
                    .plus(reply));
        }
