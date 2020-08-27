@@ -184,7 +184,7 @@ public class MarketApi
   }
 
   public static String getHelpMessage() {
-    return "请使用【.jita + 中文】 或者 【.id + 数字】获取物品报价";
+    return "【.jita + 中文】搜索物品列表或报价\n【.id + 数字】精准查找物品报价\n【.get 列表】获取可供查阅的资讯";
   }
   public static boolean stringContainsItemFromArray(String inputStr, String[] items) {
     return Arrays.stream(items).allMatch(inputStr::contains);
