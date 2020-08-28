@@ -9,6 +9,9 @@ import net.mamoe.mirai.utils.MiraiLogger;
 import java.util.function.Consumer;
 
 import static com.example.plugin.AdminModule.*;
+import static com.example.plugin.Constants.KEYWORD_PATH;
+import static com.example.plugin.EVEMapping.searchItemFromId;
+import static com.example.plugin.EVEMapping.searchItemFromKeyword;
 import static com.example.plugin.MarketApi.*;
 
 /**
@@ -50,7 +53,7 @@ public class MyListener implements Consumer<GroupMessageEvent> {
            String keyword = message.replace(CMD[0] + " ","");
            String reply = "关键字:'"+ keyword +"'没有返回匹配项。白面鸮这样说道。";
            try {
-               reply = callSearchKeyWordApi(keyword);
+               reply = searchItemFromKeyword(keyword);
            } catch( Exception e) {
                System.out.println(e.getMessage());
            }
@@ -62,7 +65,7 @@ public class MyListener implements Consumer<GroupMessageEvent> {
                    : message.replace(CMD[2] + " ","");
            String reply = "关键字:'"+ id +"'没有返回匹配项。白面鸮这样说道。";
            try {
-               reply = callDetailItemApi(id);
+               reply = searchItemFromId(id);
            } catch( Exception e) {
                System.out.println(e.getMessage());
            }
@@ -80,21 +83,22 @@ public class MyListener implements Consumer<GroupMessageEvent> {
            } else {
                String key = input.substring(0, input.indexOf(' '));
                String value = input.substring(input.indexOf(' ') + 1);
-               reply = setProperties(key, value);
+               reply = setProperties(key, value, KEYWORD_PATH);
                api.sendMessage(new At(member).plus(reply));
            }
        } else if (message.startsWith(CMD[5])) {
            // .del
            String key = message.replace(CMD[5] + " ","");
-           String reply = deletePropertyByKey(key);
+           String reply = deletePropertyByKey(key,KEYWORD_PATH);
            api.sendMessage(new At(member).plus(reply));
        } else if (message.startsWith(CMD[6])) {
            // .del
            String key = message.replace(CMD[6] + " ","");
            if (key.equals("列表")) {
-               api.sendMessage(new At(member).plus(getPropertiesFullList()));
+               api.sendMessage(new At(member).plus(getPropertiesFullList(KEYWORD_PATH)));
            } else {
-               api.sendMessage(new At(member).plus(getPropertyByKey(key)));
+               String value = getPropertyByKey(key,KEYWORD_PATH);
+               api.sendMessage(new At(member).plus(value == null ? "指令错误" : value));
            }
        }
 

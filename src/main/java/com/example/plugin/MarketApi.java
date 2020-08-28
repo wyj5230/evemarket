@@ -3,22 +3,16 @@ package com.example.plugin;
 import com.example.plugin.evemarketDTO.MarketItem;
 import com.example.plugin.evemarketDTO.SearchResult;
 import com.google.gson.Gson;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
+
+import static com.example.plugin.AdminModule.*;
+import static com.example.plugin.EVEMapping.retrieveJsonFromAPI;
 
 public class MarketApi
 {
@@ -64,7 +58,7 @@ public class MarketApi
           } else if (secondSearchResults.size() == 1 ) {
             return callDetailItemApi(secondSearchResults.get(0).getId());
           }
-          return constuctBlurSearchResult(keyword, secondSearchResults);
+          return constuctBlurSearchResultFromEveMarket(keyword, secondSearchResults);
         }
       }
     } else if (searchResultArray.length() == 1 ||
@@ -77,7 +71,7 @@ public class MarketApi
       //对应返回多个结果的情况
       List<SearchResult> searchResults = getSearchResults(searchResultArray,20);
       System.out.println("Scenario 3, returning list with "+ searchResults.size() +" items.");
-      return constuctBlurSearchResult(keyword, searchResults);
+      return constuctBlurSearchResultFromEveMarket(keyword, searchResults);
     }
 
   }
@@ -101,7 +95,7 @@ public class MarketApi
     List<SearchResult> searchResults = new ArrayList<SearchResult>();
     for(Object searchResultJson: searchResultArray){
       SearchResult searchResultJava = new Gson().fromJson(searchResultJson.toString(), SearchResult.class);
-      if (searchResults.size() <= limit && stringContainsItemFromArray(searchResultJava.getName(), matchWords) ) {
+      if (searchResults.size() <= limit && stringContainsAllItemFromArray(searchResultJava.getName(), matchWords) ) {
         searchResults.add(searchResultJava);
       }
     }
@@ -134,14 +128,7 @@ public class MarketApi
             marketItem.getBuy_stats().getOrder_count(), marketItem.getSell_stats().getFive_percent(),marketItem.getSell_stats().getOrder_count() );
   }
 
-  private static String retrieveJsonFromAPI(String urlString) throws IOException {
-    HttpClient client = HttpClients.custom().build();
-    HttpGet searchItem = new HttpGet(urlString);
-    searchItem.setHeader("User-Agent", "Mozilla/5.0");
-    HttpResponse searchResponse = client.execute(searchItem);
-    HttpEntity entity = searchResponse.getEntity();
-    String jsonResponse = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-    return jsonResponse;
+
 //    String USER_AGENT = "Mozilla/5.0";
 //    URL url = new URL(urlString);
 //    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -164,29 +151,9 @@ public class MarketApi
 //      return responseBody;
 //    }
 //    return null;
-  }
-
-  private static String constructPriceLine(String itemName, double buyPrice, int buyOrder, double sellPrice, int sellOrder){
-    return itemName +"\n"
-              + "吉他买价： " + NumberFormat.getNumberInstance(Locale.US).format(Math.round(buyPrice)) + "ISK"
-              + " 买单数： " + buyOrder +"\n"
-              + "吉他售价： "+ NumberFormat.getNumberInstance(Locale.US).format(Math.round(sellPrice)) + "ISK"
-              + " 卖单数： "+ sellOrder +"\n";
-  }
-
-  private static String constuctBlurSearchResult(String keyword, List<SearchResult> searchResults){
-    StringBuilder result = new StringBuilder("关键词'" + keyword + "'返回了多个匹配项，请从以下列表挑选: \n");
-    for (SearchResult searchResult : searchResults) {
-      result.append(searchResult.getName()).append(", id ").append(searchResult.getId()).append("\n");
-    }
-    result.append("请使用'.jita + 中文物品名全称' 或者 '.id + 数字id' 进行查询").append("\n");
-    return result.toString();
-  }
 
   public static String getHelpMessage() {
     return "【.jita + 中文】搜索物品列表或报价\n【.id + 数字】精准查找物品报价\n【.get 列表】获取可供查阅的资讯";
   }
-  public static boolean stringContainsItemFromArray(String inputStr, String[] items) {
-    return Arrays.stream(items).allMatch(inputStr::contains);
-  }
+
 }
